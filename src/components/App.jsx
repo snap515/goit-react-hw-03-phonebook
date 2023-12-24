@@ -17,8 +17,11 @@ export class App extends Component {
       this.setState({contacts: JSON.parse(localStorage.getItem('contacts')),})
   }
 
-  componentDidUpdate() {
-    localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
+    }
+    
   }
 
   onInputChange = e => {
